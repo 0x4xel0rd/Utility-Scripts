@@ -1,0 +1,2 @@
+python3 -m pip install -U distorm3 yara pycrypto pillow openpyxl ujson pytz ipython capstone
+python3 -m pip install -U git+https://github.com/volatilityfoundation/volatility3.git
