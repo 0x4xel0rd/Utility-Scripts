@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#Update and Upgrade
+sudo apt-get update
+sudo apt-get upgrade
+
 #add /opt ownership to kali user
 sudo chown -R kali:kali /opt
 
