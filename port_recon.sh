@@ -38,7 +38,7 @@ for ip in "$@"; do
     # 4. Everything scan on all TCP ports
     echo "\n[4/4] Performing a detailed scan on all open TCP ports for $ip..."
     if [ -n "$open_ports" ]; then
-        nmap -T4 --min-rate 1000 -sV -sC -A -p "$open_ports" "$ip" | tee -a "$output_file"
+        nmap -T4 --min-rate 1000 -sV -sC -A --script=vuln -p "$open_ports" "$ip" | tee -a "$output_file"
     else
         echo "No open TCP ports found to perform a detailed scan." | tee -a "$output_file"
     fi
