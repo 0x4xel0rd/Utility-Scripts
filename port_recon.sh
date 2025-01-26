@@ -20,15 +20,15 @@ for ip in "$@"; do
 
     # 1. Scan top TCP ports
     echo "\n[1/4] Scanning top TCP ports for $ip..."
-    nmap -v --top-ports 1000 -T4 --min-rate 1000 -sV -sC "$ip" | tee -a "$output_file"
+    nmap --top-ports 1000 -T4 --min-rate 1000 -sV -sC "$ip" | tee -a "$output_file"
 
     # 2. Scan common UDP ports
     echo "\n[2/4] Scanning UDP ports for $ip..."
-    nmap -v -sU -T4 --min-rate 1000 -sV -sC "$ip" | tee -a "$output_file"
+    nmap -sU -T4 --min-rate 1000 -sV -sC "$ip" | tee -a "$output_file"
 
     # 3. Scan all TCP ports and extract open ports
     echo "\n[3/4] Scanning all TCP ports for $ip and extracting open ports..."
-    all_tcp_results=$(nmap -v -T4 --min-rate 1000 -p- "$ip")
+    all_tcp_results=$(nmap -T4 --min-rate 1000 -p- "$ip")
     echo "$all_tcp_results" | tee -a "$output_file"
 
     # Extract open TCP ports
@@ -38,7 +38,7 @@ for ip in "$@"; do
     # 4. Everything scan on all TCP ports
     echo "\n[4/4] Performing a detailed scan on all open TCP ports for $ip..."
     if [ -n "$open_ports" ]; then
-        nmap -v -T4 --min-rate 1000 -sV -sC -A -p "$open_ports" "$ip" | tee -a "$output_file"
+        nmap -T4 --min-rate 1000 -sV -sC -A -p "$open_ports" "$ip" | tee -a "$output_file"
     else
         echo "No open TCP ports found to perform a detailed scan." | tee -a "$output_file"
     fi
