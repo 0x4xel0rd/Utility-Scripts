@@ -14,6 +14,9 @@ echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sou
 sudo apt-get update
 sudo apt-get install sublime-text
 
+#rlwrap to enable arrow key function on a reverse
+sudo apt-get install rlwrap
+
 #Recon Tools
 
 #ReconSpider from HTB, extracts links, comments, subdomains and other juicy information from the html code of the page.
