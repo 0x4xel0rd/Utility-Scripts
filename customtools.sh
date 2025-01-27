@@ -44,3 +44,7 @@ wget https://github.com/nicocha30/ligolo-ng/releases/download/v0.7.5/ligolo-ng_a
 #proxy
 wget https://github.com/nicocha30/ligolo-ng/releases/download/v0.7.5/ligolo-ng_proxy_0.7.5_linux_amd64.tar.gz
 wget https://github.com/nicocha30/ligolo-ng/releases/download/v0.7.5/ligolo-ng_proxy_0.7.5_windows_amd64.zip
+
+#A tool to change grafana hash to hashcat crackable format
+git clone https://github.com/iamaldi/grafana2hashcat.git # save hash in this format 'hash, salt' > hash.txt | hashcat -m 10900 -a 0 bigbang.grafanahashcat.hashes /opt/Passwords/rockyou.txt
+
