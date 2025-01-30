@@ -18,6 +18,10 @@ sudo apt-get install sublime-text
 sudo apt-get install rlwrap
 
 #Recon Tools
+#Directory, subdomain fuzzing
+sudo apt-get install feroxbuster
+sudo apt-get install gobuster
+
 
 #ReconSpider from HTB, extracts links, comments, subdomains and other juicy information from the html code of the page.
 mkdir /opt/recon
