@@ -22,6 +22,9 @@ sudo apt-get install rlwrap
 sudo apt-get install feroxbuster
 sudo apt-get install gobuster
 
+#github dumper
+git clone https://github.com/arthaud/git-dumper.git
+
 
 #ReconSpider from HTB, extracts links, comments, subdomains and other juicy information from the html code of the page.
 mkdir /opt/recon
