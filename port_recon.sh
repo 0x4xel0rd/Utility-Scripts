@@ -20,11 +20,11 @@ for ip in "$@"; do
 
     # 1. Scan top TCP ports
     echo "\n[1/4] Scanning top TCP ports for $ip..."
-    nmap --top-ports 1000 -T4 --min-rate 1000 -sV -sC "$ip" | tee -a "$output_file"
+    nmap -T4 --min-rate 1000 "$ip" | tee -a "$output_file"
 
     # 2. Scan common UDP ports
     echo "\n[2/4] Scanning UDP ports for $ip..."
-    nmap -sU -T4 --min-rate 1000 -sV -sC "$ip" | tee -a "$output_file"
+    nmap -sU -T4 --min-rate 1000 "$ip" | tee -a "$output_file"
 
     # 3. Scan all TCP ports and extract open ports
     echo "\n[3/4] Scanning all TCP ports for $ip and extracting open ports..."
@@ -35,10 +35,13 @@ for ip in "$@"; do
     open_ports=$(echo "$all_tcp_results" | grep -oP '\d+/tcp\s+open' | cut -d '/' -f 1 | tr '\n' ',')
     echo "Open TCP ports for $ip: $open_ports" | tee -a "$output_file"
 
+    # Version Scan for all ports
+    nmap -T4 --min-rate 1000 -sV -sC -p "$open_ports" "$ip" | tee -a "$output_file"
+
     # 4. Everything scan on all TCP ports
     echo "\n[4/4] Performing a detailed scan on all open TCP ports for $ip..."
     if [ -n "$open_ports" ]; then
-        nmap -T4 --min-rate 1000 -sV -sC -A --script=vuln -p "$open_ports" "$ip" | tee -a "$output_file"
+        nmap -T4 -sV -sC -A --script=vuln -p "$open_ports" "$ip" | tee -a "$output_file"
     else
         echo "No open TCP ports found to perform a detailed scan." | tee -a "$output_file"
     fi
@@ -48,4 +51,3 @@ for ip in "$@"; do
 done
 
 exit 0
-
